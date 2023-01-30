@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const globalErrorHandler = require("./controllers/errorController");
 const userRouter = require("./routes/userRoutes");
 const videoRouter = require("./routes/videoRoutes");
+const expertTipsRouter = require("./routes/expertTipsRoutes");
 const AppError = require("./utils/appError");
 
 // Set security HTTP headers
@@ -44,6 +45,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/videos", videoRouter);
+app.use("/api/v1/expertTips", expertTipsRouter);
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });

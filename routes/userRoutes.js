@@ -14,7 +14,6 @@ router
   .route("/")
   .get(userController.getAllUsers)
   .post(authController.bancode, userController.createUser);
-
 router
   .route("/:id")
   .get(userController.getUser)
