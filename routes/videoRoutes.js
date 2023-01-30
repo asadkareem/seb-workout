@@ -3,6 +3,8 @@ const videoController = require("./../controllers/videoController");
 const authController = require("./../controllers/authController");
 const multer = require("multer");
 const router = express.Router();
+router.route("/:id/like").patch(videoController.likeVideo);
+router.route("/:id/dislike").patch(videoController.dislikeVideo);
 
 router.use(authController.protect);
 router.use(authController.restrictTo("admin"));

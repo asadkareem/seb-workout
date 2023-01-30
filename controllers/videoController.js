@@ -25,6 +25,34 @@ exports.videoUpdateMiddleware = (req, res, next) => {
   }
   next();
 };
+exports.likeVideo = catchAsync(async (req, res, next) => {
+  const doc = await Video.findByIdAndUpdate(req.params.id, {
+    $inc: { likes: 1 },
+  });
+  if (!doc) {
+    return next(new AppError("No document found with that ID", 404));
+  }
+  res.status(200).json({
+    status: "success",
+    data: {
+      data: doc,
+    },
+  });
+});
+exports.dislikeVideo = catchAsync(async (req, res, next) => {
+  const doc = await Video.findByIdAndUpdate(req.params.id, {
+    $inc: { dislikes: 1 },
+  });
+  if (!doc) {
+    return next(new AppError("No document found with that ID", 404));
+  }
+  res.status(200).json({
+    status: "success",
+    data: {
+      data: doc,
+    },
+  });
+});
 exports.createVideo = factory.createOne(Video);
 exports.getAllVideos = factory.getAll(Video);
 exports.getVideo = factory.getOne(Video);
