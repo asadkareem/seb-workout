@@ -1,19 +1,34 @@
 const express = require("express");
 const videoController = require("./../controllers/videoController");
 const authController = require("./../controllers/authController");
+const multer = require("multer");
 const router = express.Router();
 
 router.use(authController.protect);
 router.use(authController.restrictTo("admin"));
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/videos");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 router
   .route("/")
   .get(videoController.getAllVideos)
-  .post(videoController.uploadVideo, videoController.createVideo);
-
+  .post(upload.single("video"), videoController.videoMiddleware);
 router
   .route("/:id")
   .get(videoController.getVideo)
-  .patch(videoController.updateVideo)
+  .patch(
+    upload.single("video"),
+    videoController.videoUpdateMiddleware,
+    videoController.updateVideo
+  )
   .delete(videoController.deleteVideo);
 
 module.exports = router;

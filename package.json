@@ -30,6 +30,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
     "pug": "^3.0.2",
+    "sharp": "^0.31.3",
     "validator": "^13.7.0"
   },
   "devDependencies": {
