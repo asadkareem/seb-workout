@@ -6,30 +6,21 @@ const multer = require("multer");
 router.use(authController.protect);
 router.use(authController.restrictTo("admin"));
 
-const multerStorage = multer.memoryStorage();
-const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    cb(new AppError("Not an image! Please upload only images.", 400), false);
-  }
-};
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
-exports.uploadTourImages = upload.fields([
-  { name: "imageCover", maxCount: 1 },
-  { name: "images", maxCount: 3 },
-]);
-
 router
   .route("/")
   .get(expertTipsController.getAllExpertTips)
-  .post(expertTipsController.createExpertTips);
+  .post(
+    expertTipsController.uploadTipsImages,
+    expertTipsController.resizeTipsImages,
+    expertTipsController.createExpertTips
+  );
 router
   .route("/:id")
   .get(expertTipsController.getExpertTips)
-  .patch(expertTipsController.updateExpertTips)
+  .patch(
+    expertTipsController.uploadTipsImages,
+    expertTipsController.resizeTipsImages,
+    expertTipsController.updateExpertTips
+  )
   .delete(expertTipsController.deleteExpertTips);
 module.exports = router;

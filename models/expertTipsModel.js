@@ -11,10 +11,6 @@ const expertTipsSchema = new mongoose.Schema({
     trim: true,
   },
   images: [String],
-  video: {
-    type: String,
-    unique: true,
-  },
   author: {
     type: String,
   },
@@ -23,5 +19,5 @@ const expertTipsSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
-const expertTips = mongoose.model("expertTipsSchema", expertTipsSchema);
+const expertTips = mongoose.model("expertTips", expertTipsSchema);
 module.exports = expertTips;
