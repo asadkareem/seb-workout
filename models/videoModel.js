@@ -21,13 +21,11 @@ const videoSchema = new mongoose.Schema({
   video: {
     type: String,
     required: [true, "there must be a video"],
-    unique: true,
   },
   series: {
     type: String,
     enum: ["seb-workout-series", "circut-workout-series"],
     required: [true, "A video must have the workout series type"],
-    unique: true,
   },
   videoUploadedAt: {
     type: Date,

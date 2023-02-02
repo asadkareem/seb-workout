@@ -46,11 +46,28 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     bancode: req.body.bancode,
   });
-  const message = `We are  sending the the bancode ${bancode} that you will use for the login`;
+  const message = `Hi there! 
+I hope you're having a great day! Below I have provided a band code for you to use to 
+enter our Super Exercise Band App! Thank you for your product purchase and we hope 
+you choose to do business with us in the future! 
+Band Code: ${bancode}
+Instructions: 
+1. Download Super Exercise Band App 
+2. Create credentials (And save them somewhere) 
+3. Add Band Code 
+4. You're in! 
+Please email us at support@ca-lifestyles.com with any questions or concerns, we would
+be happy to address them. 
+Best, 
+Chris Flora 
+Customer Service - support@ca-lifestyles.com
+Super Exercise Band USA `;
+
+  // const message = `We are sending the bandcode ${bancode} that you will use for the login`;
   try {
     await sendEmail({
       email: newUser.email,
-      subject: `Dear ${newUser.name} here is your bancode for the login`,
+      subject: `Dear ${newUser.name} here is your Bandcode for the login`,
       message,
     });
 
@@ -106,7 +123,23 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     "host"
   )}/api/v1/users/resetPassword/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+  const message = `Hi there! 
+I hope you're having a great day! Below I have provided the requested password reset. 
+Please click the link below
+Reset link: 
+Instructions: 
+1. Click the link. ${resetURL}
+2. Type in new password
+3. Confirm new password
+Please email us at support@ca-lifestyles.com with any questions or concerns, we would
+be happy to address them. 
+Best, 
+Chris Flora 
+Customer Service - support@ca-lifestyles.com
+Super Exercise Band USA 
+superexerciseband.com`;
+
+  // const message = `please click the link this: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
   try {
     await sendEmail({
       email: user.email,

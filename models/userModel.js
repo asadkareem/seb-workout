@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a password"],
     minlength: 8,
-    select: false,
+    // select: false,
   },
   passwordConfirm: {
     type: String,
@@ -98,7 +98,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
       this.passwordChangedAt.getTime() / 1000,
       10
     );
-
     return JWTTimestamp < changedTimestamp;
   }
   // False means NOT changed
