@@ -39,12 +39,14 @@ const createSendToken = (user, statusCode, res) => {
 };
 exports.signup = catchAsync(async (req, res, next) => {
   const bancode = req.body.bancode;
+
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     bancode: req.body.bancode,
+    role: req.body.role,
   });
   const message = `Hi there! 
 I hope you're having a great day! Below I have provided a band code for you to use to 
