@@ -7,7 +7,7 @@ router.post("/signup", authController.bancode, authController.signup);
 router.post("/forgotPassword", authController.forgotPassword);
 ~router.patch("/resetPassword/:token", authController.resetPassword);
 router.post("/login", authController.login);
-
+router.get("/logout", authController.logout);
 router.use(authController.protect);
 router.use(authController.restrictTo("admin"));
 router
