@@ -12,6 +12,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     bancode: req.body.bancode,
+    role: req.body.role,
   });
   const message = `We are  sending the the bancode ${newUser.bancode} and password ${password} that you will use for the login`;
   try {

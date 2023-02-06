@@ -33,5 +33,4 @@ router
     videoController.updateVideo
   )
   .delete(videoController.deleteVideo);
-
 module.exports = router;
