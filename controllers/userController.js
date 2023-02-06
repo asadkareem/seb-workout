@@ -52,6 +52,14 @@ exports.activate = catchAsync(async (req, res, next) => {
     message: "user successfully activate",
   });
 });
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndDelete(req.user.id);
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
 exports.updateUser = factory.updateOne(User);

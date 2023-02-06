@@ -9,6 +9,7 @@ router.post("/forgotPassword", authController.forgotPassword);
 router.post("/login", authController.login);
 router.get("/logout", authController.logout);
 router.use(authController.protect);
+router.delete("/deleteMe", userController.deleteMe);
 router.use(authController.restrictTo("admin"));
 router
   .route("/")
