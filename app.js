@@ -7,8 +7,8 @@ const globalErrorHandler = require("./controllers/errorController");
 const userRouter = require("./routes/userRoutes");
 const videoRouter = require("./routes/videoRoutes");
 const expertTipsRouter = require("./routes/expertTipsRoutes");
+const cors = require("cors");
 const AppError = require("./utils/appError");
-
 // Set security HTTP headers
 app.use(
   helmet({
@@ -23,6 +23,7 @@ app.use(
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
 app.use(express.static("public"));
+app.use(cors());
 // // Data sanitization against NoSQL query injection
 // app.use(mongoSanitize());
 
